@@ -2,7 +2,10 @@
 /dist
 /node_modules
 /build
+
+/postgres
 .env
+/.vscode
 
 # Logs
 logs

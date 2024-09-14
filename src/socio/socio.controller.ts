@@ -1,15 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Put } from '@nestjs/common';
 import { SocioService } from './socio.service';
 import { CreateSocioDto } from './dto/create-socio.dto';
 import { UpdateSocioDto } from './dto/update-socio.dto';
 
-@Controller('socio')
+@Controller('members')
 export class SocioController {
   constructor(private readonly socioService: SocioService) {}
 
   @Post()
-  create(@Body() createSocioDto: CreateSocioDto) {
-    return this.socioService.create(createSocioDto);
+  async create(@Body() createSocioDto: CreateSocioDto) {
+    try {
+      return await this.socioService.create(createSocioDto);
+    } catch (error) {
+      throw error; 
+    }
   }
 
   @Get()
@@ -19,16 +23,23 @@ export class SocioController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.socioService.findOne(+id);
+    return this.socioService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateSocioDto: UpdateSocioDto) {
-    return this.socioService.update(+id, updateSocioDto);
+    if (updateSocioDto.email && !this.isValidEmail(updateSocioDto.email)) {
+      throw new BadRequestException('Correo electrónico inválido, debe contener un "@"');
+    }
+    return this.socioService.update(id, updateSocioDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.socioService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return this.socioService.remove(id);
+  }
+
+  private isValidEmail(email: string): boolean {
+    return email.includes('@');
   }
 }

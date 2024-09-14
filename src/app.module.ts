@@ -5,6 +5,8 @@ import { ClubModule } from './club/club.module';
 import { SocioModule } from './socio/socio.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SocioEntity } from './socio/entities/socio.entity';
+import { ClubEntity } from './club/entities/club.entity';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.DB_NAME,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      autoLoadEntities: true,
+      entities: [SocioEntity, ClubEntity],
       synchronize: true,
     }),
     SocioModule,

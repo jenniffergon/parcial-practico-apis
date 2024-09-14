@@ -1,21 +1,23 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn, JoinTable } from 'typeorm';
 import { ClubEntity } from 'src/club/entities/club.entity';
+import { IsEmail } from 'class-validator';
 
 @Entity()
 export class SocioEntity {
-@PrimaryGeneratedColumn('uuid')
-id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-@Column('text')
-name: string;
- 
-@Column('text')
-email: string;
+  @Column('text')
+  nombre: string;
 
-@Column('date')
-fechaDeNacimiento: Date;
+  @IsEmail({}, { message: 'Correo electrónico inválido' })
+  @Column('text')
+  email: string;
 
-@ManyToMany(() => ClubEntity, (club) => club.socio)
-@JoinTable()
-club: ClubEntity[];
+  @Column('date')
+  fechaDeNacimiento: Date;
+
+  @ManyToMany(() => ClubEntity, (club) => club.socios)
+  @JoinTable()  
+  clubs: ClubEntity[];
 }
