@@ -22,8 +22,12 @@ export class ClubController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clubService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const club = await this.clubService.findOne(id);
+    if (!club) {
+      throw new NotFoundException(`El club con el ${id} no existe`);
+    }
+    return club;
   }
 
   @Put(':id')

@@ -4,7 +4,7 @@ import { UpdateClubDto } from './dto/update-club.dto';
 import { ClubEntity } from './entities/club.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
-import { SocioEntity } from 'src/socio/entities/socio.entity';
+import { SocioEntity } from '../socio/entities/socio.entity';
 
 @Injectable()
 export class ClubService {
@@ -45,26 +45,28 @@ export class ClubService {
   }
 
   async addMemberToClub(clubId: string, socioId: string): Promise<ClubEntity> {
-    const club = await this.clubRepository.findOne({
-      where: { id: clubId },
-      relations: ['socios']
-    });
+    const club = await this.clubRepository.findOne({ where: { id: clubId }, relations: ['socios'] });
     if (!club) {
       throw new NotFoundException('Club no encontrado');
     }
-
+  
     const socio = await this.socioRepository.findOne({ where: { id: socioId } });
     if (!socio) {
       throw new NotFoundException('Socio no encontrado');
     }
-
+    
+    if (!Array.isArray(club.socios)) {
+      club.socios = [];
+    }
+  
     if (!club.socios.some(s => s.id === socio.id)) {
       club.socios.push(socio);
-      await this.clubRepository.save(club);
+      return await this.clubRepository.save(club);
     }
-
+  
     return club;
   }
+  
 
   async findMembersFromClub(clubId: string): Promise<SocioEntity[]> {
     const club = await this.clubRepository.findOne({

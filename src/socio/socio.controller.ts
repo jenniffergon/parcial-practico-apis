@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, BadRequestException, Put, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, BadRequestException, Put, HttpCode, NotFoundException } from '@nestjs/common';
 import { SocioService } from './socio.service';
 import { CreateSocioDto } from './dto/create-socio.dto';
 import { UpdateSocioDto } from './dto/update-socio.dto';
@@ -22,8 +22,12 @@ export class SocioController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.socioService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const socio = await this.socioService.findOne(id);
+    if (!socio) {
+      throw new NotFoundException(`El socio con el ${id} no existe`);
+    }
+    return socio;
   }
 
   @Put(':id')

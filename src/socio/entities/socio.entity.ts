@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn, JoinTable } from 'typeorm';
-import { ClubEntity } from 'src/club/entities/club.entity';
+import { ClubEntity } from '../../club/entities/club.entity';
 import { IsEmail } from 'class-validator';
 
 @Entity()
