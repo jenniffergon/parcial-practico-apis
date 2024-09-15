@@ -1,0 +1,845 @@
+{
+	"info": {
+		"_postman_id": "3c66eb07-fb23-4850-8019-311023556e5f",
+		"name": "Club",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29499381"
+	},
+	"item": [
+		{
+			"name": "Crear un club válido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const clubId = response.id;\r",
+							"\r",
+							"pm.collectionVariables.set(\"clubId\", clubId);\r",
+							"pm.globals.set(\"clubId\", clubId);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Club Deportivo XYZ\",\r\n    \"fechaDeFundacion\": \"2000-09-01\",\r\n    \"imagen\": \"https://example.com/imagen-club.jpg\",\r\n    \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_URL}}/clubs",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un club válido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Club Deportivo XYZ\",\r\n    \"fechaDeFundacion\": \"2000-09-01\",\r\n    \"imagen\": \"https://example.com/imagen-club.jpg\",\r\n    \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/clubs",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "236"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ec-HG79M4NSrwvl51XR/KCTWp4gokQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:24:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Club Deportivo XYZ\",\n    \"fechaDeFundacion\": \"2000-09-01T00:00:00.000Z\",\n    \"imagen\": \"https://example.com/imagen-club.jpg\",\n    \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\",\n    \"id\": \"60b8ffb1-0458-46fe-ba0d-20228f91f056\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un club inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Club Deportivo XYZ\",\r\n    \"imagen\": \"https://example.com/imagen-club.jpg\",\r\n    \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_URL}}/clubs",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un club inválido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Club Deportivo XYZ\",\r\n    \"imagen\": \"https://example.com/imagen-club.jpg\",\r\n    \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/clubs",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5f-N1kiQk+tIaloBiK2mVMTHnyYtCg\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:28:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": [\n        \"fechaDeFundacion must be a Date instance\"\n    ],\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los clubs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/clubs",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los clubs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clubs",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "670"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29e-dF2AvS+3NjrrKYSaiLq4btDX2VU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:28:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"60e8316d-6c5d-43a5-8a0d-92a77f0d80fe\",\n        \"nombre\": \"Club Deportivo XYZ\",\n        \"fechaDeFundacion\": \"2000-08-31\",\n        \"imagen\": \"https://example.com/imagen-club.jpg\",\n        \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\n    },\n    {\n        \"id\": \"9ef236c0-0d3e-434c-a927-c27d3ee6fa3c\",\n        \"nombre\": \"Club Deportivo XYZ\",\n        \"fechaDeFundacion\": \"2000-08-31\",\n        \"imagen\": \"https://example.com/imagen-club.jpg\",\n        \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\n    },\n    {\n        \"id\": \"60b8ffb1-0458-46fe-ba0d-20228f91f056\",\n        \"nombre\": \"Club Deportivo XYZ\",\n        \"fechaDeFundacion\": \"2000-08-31\",\n        \"imagen\": \"https://example.com/imagen-club.jpg\",\n        \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener un club por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/clubs/{{clubId}}",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs",
+						"{{clubId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un club por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clubs/{{clubId}}",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "222"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"de-QzFfFE7YU1ZKY2d5tVvu4VYrHyU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:28:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"60b8ffb1-0458-46fe-ba0d-20228f91f056\",\n    \"nombre\": \"Club Deportivo XYZ\",\n    \"fechaDeFundacion\": \"2000-08-31\",\n    \"imagen\": \"https://example.com/imagen-club.jpg\",\n    \"descripcion\": \"Club dedicado a deportes y actividades recreativas.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un club por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/clubs/{{IdInexistente}}",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs",
+						"{{IdInexistente}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un club por un ID que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clubs/{{IdInexistente}}",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs",
+								"{{IdInexistente}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-WJmqhCz71wuuH6JPPeJVpAtbG6w\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:28:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Club no encontrado\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Club Cultural\",\r\n    \"fechaDeFundacion\": \"2010-05-15\",\r\n    \"imagen\": \"http://example.com/images/club-cultural.png\",\r\n    \"descripcion\": \"Club dedicado a actividades culturales y artísticas.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_URL}}/clubs/{{clubId}}",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs",
+						"{{clubId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un club",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Club Cultural\",\r\n    \"fechaDeFundacion\": \"2010-05-15\",\r\n    \"imagen\": \"http://example.com/images/club-cultural.png\",\r\n    \"descripcion\": \"Club dedicado a actividades culturales y artísticas.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/clubs/{{clubId}}",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "227"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e3-w9+cSFNSzfrqzzWhK3P3bwzw2lE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:29:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"60b8ffb1-0458-46fe-ba0d-20228f91f056\",\n    \"nombre\": \"Club Cultural\",\n    \"fechaDeFundacion\": \"2010-05-14\",\n    \"imagen\": \"http://example.com/images/club-cultural.png\",\n    \"descripcion\": \"Club dedicado a actividades culturales y artísticas.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un club con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Club Cultural\",\r\n    \"fechaDeFundacion\": \"2010-05-15\",\r\n    \"imagen\": \"http://example.com/images/club-cultural.png\",\r\n    \"descripcion\": \"Club dedicado a actividades culturales y artísticas.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_URL}}/clubs/{{IdInexistente}}",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs",
+						"{{IdInexistente}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar un club con un ID que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Club Cultural\",\r\n    \"fechaDeFundacion\": \"2010-05-15\",\r\n    \"imagen\": \"http://example.com/images/club-cultural.png\",\r\n    \"descripcion\": \"Club dedicado a actividades culturales y artísticas.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/clubs/{{IdInexistente}}",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs",
+								"{{IdInexistente}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-WJmqhCz71wuuH6JPPeJVpAtbG6w\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:29:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Club no encontrado\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un club por su ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/clubs/{{clubId}}",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs",
+						"{{clubId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un club por su ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clubs/{{clubId}}",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:29:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar un club con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/clubs/{{IdInexistente}}",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"clubs",
+						"{{IdInexistente}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un club con un ID que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clubs/{{IdInexistente}}",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clubs",
+								"{{IdInexistente}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-WJmqhCz71wuuH6JPPeJVpAtbG6w\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Sep 2024 05:29:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Club no encontrado\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "clubId",
+			"value": ""
+		}
+	]
+}
