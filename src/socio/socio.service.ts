@@ -25,7 +25,7 @@ export class SocioService {
   async findOne(id: string): Promise<SocioEntity> {
     const socio = await this.socioRepository.findOne({ where: { id } });
     if (!socio) {
-      throw new BadRequestException('Socio no encontrado');
+      throw new NotFoundException('Socio no encontrado');
     }
     return socio;
   }
