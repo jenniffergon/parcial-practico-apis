@@ -1,15 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, HttpCode } from '@nestjs/common';
 import { ClubService } from './club.service';
 import { CreateClubDto } from './dto/create-club.dto';
 import { UpdateClubDto } from './dto/update-club.dto';
 
-@Controller('club')
+@Controller('clubs')
 export class ClubController {
   constructor(private readonly clubService: ClubService) {}
 
   @Post()
-  create(@Body() createClubDto: CreateClubDto) {
-    return this.clubService.create(createClubDto);
+  async create(@Body() createClubDto: CreateClubDto) {
+    try{
+      return this.clubService.create(createClubDto);
+    } catch (error) {
+      throw error; 
+    }
   }
 
   @Get()
@@ -19,16 +23,17 @@ export class ClubController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.clubService.findOne(+id);
+    return this.clubService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateClubDto: UpdateClubDto) {
-    return this.clubService.update(+id, updateClubDto);
+    return this.clubService.update(id, updateClubDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.clubService.remove(+id);
+  @HttpCode(204)
+  async remove(@Param('id') id: string) {
+    return this.clubService.remove(id);
   }
 }

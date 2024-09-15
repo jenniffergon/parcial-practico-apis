@@ -3,7 +3,7 @@
 /node_modules
 /build
 
-/postgres
+postgres/
 .env
 /.vscode
 
@@ -58,3 +58,17 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+postgres/pg_stat_tmp/db_0.stat
+/postgres
+*.stat
+postgres/pg_stat_tmp/db_0.stat
+postgres/pg_stat_tmp/global.stat
+postgres/pg_wal/000000010000000000000001
+postgres/pg_xact/0000
+postgres/pg_wal/000000010000000000000001
+postgres/pg_stat_tmp/global.stat
+postgres/pg_stat_tmp/db_0.stat
+postgres/global/pg_control
+postgres/base/16384/2659
+postgres/base/16384/2658
+postgres/base/16384/1249

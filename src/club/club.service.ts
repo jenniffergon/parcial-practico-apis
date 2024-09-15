@@ -1,26 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateClubDto } from './dto/create-club.dto';
 import { UpdateClubDto } from './dto/update-club.dto';
+import { ClubEntity } from './entities/club.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ClubService {
-  create(createClubDto: CreateClubDto) {
-    return 'This action adds a new club';
+  constructor(
+    @InjectRepository(ClubEntity)
+    private readonly clubRepository: Repository<ClubEntity>,
+  ) {}
+
+  async create(createClubDto: CreateClubDto): Promise<ClubEntity> {
+    const club = this.clubRepository.create(createClubDto);
+    return this.clubRepository.save(club);
   }
 
-  findAll() {
-    return `This action returns all club`;
+  async findAll(): Promise<ClubEntity[]> {
+    return this.clubRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} club`;
+  async findOne(id: string): Promise<ClubEntity> {
+    const club = await this.clubRepository.findOne({ where: { id } });
+    if (!club) {
+      throw new NotFoundException('Club no encontrado');
+    }
+    return club;
   }
 
-  update(id: number, updateClubDto: UpdateClubDto) {
-    return `This action updates a #${id} club`;
+  async update(id: string, updateClubDto: UpdateClubDto): Promise<ClubEntity> {
+    const club = await this.findOne(id); 
+    await this.clubRepository.update(id, updateClubDto);
+    return this.findOne(id); 
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} club`;
+  async remove(id: string): Promise<void> {
+    const club = await this.findOne(id);
+    await this.clubRepository.remove(club);
   }
 }

@@ -7,7 +7,7 @@ export class ClubEntity {
   id: string;
 
   @Column('text')
-  name: string;
+  nombre: string;
 
   @Column('date')
   fechaDeFundacion: Date;
